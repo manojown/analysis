@@ -1,0 +1,24 @@
+{
+  "name": "analysis",
+  "version": "1.0.0",
+  "engines": {
+    "npm": "3.10.3",
+    "node": "6.9.1"
+  },
+  "description": "analysis application for currency exchange",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.5",
+    "request": "^2.79.0",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "manoj",
+  "license": "ISC"
+}
