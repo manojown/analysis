@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } }; 
-mongoose.connect('Enter  you mongo db connection url',options);     // connection to database by mangoose ODM
+mongoose.connect('mongodb://manoj337:manoj337@ds155028.mlab.com:55028/intelliadv',options);     // connection to database by mangoose ODM
 var Schema = mongoose.Schema;   // create scheme for specific collection to do operation
 
 // create a schema
