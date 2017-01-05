@@ -1,6 +1,4 @@
-# analysis
-  Currency Rates analysis by date 
- 
+# Currency Rates Analysis
 # Demo    <a>https://intelliadv1.herokuapp.com/</a>
 
 # Define
