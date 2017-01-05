@@ -11,8 +11,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http,$element,
 
  // here currency option
 $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7","#aaa9ff","#e38c2d","#dbdcff","#07064c","#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7","#aaa9ff","#e38c2d","#dbdcff","#07064c"];
-    $scope.cur_rates = ["AUD","USD",
-    "BGN",
+    $scope.cur_rates = ["AUD","USD" , "BGN",
     "BRL",
     "CAD",
     "CHF",
@@ -45,7 +44,7 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
 
 
 
-     $scope.selected1 = [];   /// for insert  model 
+     $scope.selected1 = [];   /// for insert  model  
      $scope.selected = [];
 
       $scope.toggle = function (item, list) {
@@ -88,7 +87,7 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
           
              }).error(function(){
                 deferred.reject('ERROR');
-                    $scope.flag = "success Full inserted";
+                    $scope.flag = "server bad response so few entry failed  ";
              });
    
 
@@ -99,12 +98,14 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
 
   $scope.generate = function(){
 
-    $scope.spinner = true ; 
+      $scope.spinner = true ; 
      console.log($scope.date);
         
         $http.post('/graphmonth',$scope.date).success(function(response) {
         
-       
+      
+       $scope.max =0 ;
+
        $scope.value = [];
        for(let j=0;j<$scope.selected.length;j++)
        {        
@@ -115,6 +116,9 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
                  {      
                         $scope.dateg.push(new Date(response[i].date).getDate()+"-"+monthNames[new Date(response[i].date).getMonth()]+"-"+new Date(response[i].date).getFullYear());
                         $scope.eachcurrval.push(response[i].rates[$scope.selected[j]]);
+                        if(response[i].rates[$scope.selected[j]]>$scope.max){
+                            $scope.max = response[i].rates[$scope.selected[j]];
+                        }
                       // console.log(response[i].rates[$scope.selected[j]]+" vale in curre");
                  }
                 // console.log($scope.eachcurrval+" all value");
@@ -165,13 +169,9 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
                         );
 
                 }
-                 $scope.spinner = false ;
-                
-
-                
-                 
-               
-
+                 $scope.spinner = false ;              
+                  $scope.max1 = "0:"+Math.floor($scope.max+1)+":"+parseFloat(($scope.max)/100).toFixed(2)+"";
+                  console.log($scope.max1);
            // end here graph series array
 
              $scope.myJson =  {
@@ -236,7 +236,7 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
                 }
             },
             "scale-y": {
-                "values": "0:900:10",
+                "values": $scope.max1 ,  // "0:900:10"
                 "item": {
                     "font-color": "#05636c",
                     "font-weight": "normal"
