@@ -1,13 +1,13 @@
 # analysis
-Currency analysis with Chart
+  Currency analysis by date 
  
-# Demo    <a>www.intelliadv1.herokuapp.com</a>
+# Demo    <a>https://intelliadv1.herokuapp.com/</a>
 
 # Define
 
-   1 . This is web-app where you can first insert all currency  rated in database  for long time comparision of currency in chart view.
-   2.   just Select your date to compare currency rate , Base(on what you want to compare like USD,INR ) and last select all currencies
-          whih you want to compare.
+    1 . This is web-app where you can first insert all currency  rated in database  for long time comparision of currency in chart view.
+    2.  just Select your date to compare currency rate , Base(on what you want to compare like USD,INR ) and last select all currencies
+           whih you want to compare.
   
 #  technology used - Mean Stack 
 
