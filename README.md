@@ -1,5 +1,5 @@
 # analysis
-  Currency analysis by date 
+  Currency Rates analysis by date 
  
 # Demo    <a>https://intelliadv1.herokuapp.com/</a>
 
