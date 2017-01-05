@@ -7,9 +7,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href=" https://material.angularjs.org/1.1.1/docs.css">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href=" https://material.angularjs.org/1.1.1/docs.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -17,85 +17,68 @@
   <title>Intelli-Adv</title>
 </head>
 <body ng-controller="AppCtrl">
-<md-toolbar class="md-warn " >
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
-          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-        </md-button>
-        <h2>
-          <span>
-         
-                  <div layout-gt-xs="row">
-                 
-                      <div flex-gt-xs="">
-                        <md-datepicker ng-model="contact.startdate" md-placeholder="Enter date" md-color="white"></md-datepicker>
-                      </div>
-
-                      <div flex-gt-xs="">
-                        <md-datepicker ng-model="contact.enddate" md-placeholder="Enter date"></md-datepicker>
-                      </div>
-        
-                      <div style="margin-right:55px;margin-top: -15px" >
-       
-
-         </div>  
-
-          </span>
-        </h2>
-        <span flex=""> 
-            {{flag}}
-        </span>
-        <md-button class="md-raised"  data-toggle="modal" data-target="#myModal1" >
-          Insert Entry
-        </md-button>
-        <md-button class="md-icon-button" aria-label="More">
-          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
-        </md-button>
-      </div>
-</md-toolbar>
-
-
-
-
- 
+    <md-toolbar class="md-warn " >
+       <div class="md-toolbar-tools">
+           <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+                  <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+           </md-button>
+           <h2>
+             <span>             
+               <div layout-gt-xs="row">                      
+                  <div flex-gt-xs="">
+                    <md-datepicker ng-model="contact.startdate" md-placeholder="Enter date" md-color="white"></md-datepicker>
+               </div>
+               <div flex-gt-xs="">
+                  <md-datepicker ng-model="contact.enddate" md-placeholder="Enter date"></md-datepicker>
+               </div>                                                           
+             </span>
+            </h2>
+            <span flex=""> 
+               {{flag}}
+            </span>
+             <md-button class="md-raised"  data-toggle="modal" data-target="#myModal1" >
+                Insert Entry
+             </md-button>
+             <md-button class="md-icon-button" aria-label="More">
+                  <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+                </md-button>
+         </div>
+      </md-toolbar>
 
     <!--  end here tooolbar -->
-    
-  
   <hr>
-
-  
-     <!--  end here  -->   
-         
-     
-
-     
-
   <div class="panel panel-default md-raised" style="margin-left: 20px;margin-right: 20px" >
-  <div class="panel-heading">
-    
-    
-
-
-      <!--  date picket start here   -->
-
+    <div class="panel-heading">     
+       <!--  date picket start here   -->
         <div layout-gt-xs="row">
-
-        
+            <div flex-gt-xs="">
+              <md-datepicker ng-model="date.start" md-placeholder="Enter date"></md-datepicker>
+            </div>
+            <div flex-gt-xs="">
+              <md-datepicker ng-model="date.end" md-placeholder="Enter date"></md-datepicker>
+            </div>
+        <!--  date picket End here   -->   
+        <!--   here o start select boxes-->
+            <div style="margin-right:55px;margin-top: -15px" >
+                <md-select ng-model="date.base" placeholder="Enter base">
+                <md-option  value="{{curr}}"  ng-repeat="curr in cur_rates">{{curr}}</md-option>
+                </md-select>
+            </div>  
+          <!-- here end eslect box part -->
+            <div>
+                <md-button class="md-raised md-primary"  data-toggle="modal" data-target="#myModal" >Generate</md-button>
+            </div>
+        </div>
+      </div>      
       
-       
-      <div flex-gt-xs="">
-
-        <md-datepicker ng-model="date.start" md-placeholder="Enter date"></md-datepicker>
+      <span ng-show="spinner" >
+       <md-progress-linear ng-disabled="graphseries" md-mode="indeterminate"></md-progress-linear>
+      </span>
+      <div class="panel-body"  ng-if="myJson">
+         <zingchart id = "myChart" zc-json = "myJson" zc-height = 600 zc-width = 1200 ></zingchart> </div>
       </div>
-       <div flex-gt-xs="">
-      
-        <md-datepicker ng-model="date.end" md-placeholder="Enter date"></md-datepicker>
-      </div>
-
-<!--   here o start select boxes-->
-
-    
+    </div>
+  </div>                          
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -152,59 +135,19 @@
 
 
   <!-- end here model  -->
-<div style="margin-right:55px;margin-top: -15px" >
-        <md-select ng-model="date.base" placeholder="Enter base">
-          <md-option  value="{{curr}}"  ng-repeat="curr in cur_rates">{{curr}}</md-option>
-        {{date.base}}
-        </md-select>
-
-         </div>  
-   
-      <!-- here end eslect box part -->
-
-      <div>
-       <md-button class="md-raised md-primary"  data-toggle="modal" data-target="#myModal" >Generate</md-button>
-      </div>
-      </div>
-         <!--  date picket End here   -->      
-      
-                          
-  </div>
-
-  <!--   start of  button pannel  -->
-
-
- 
-<!--  End of button pannel  -->
-<span ng-show="spinner" >
-
-   <md-progress-linear ng-disabled="graphseries" md-mode="indeterminate"></md-progress-linear>
-  </span>
-  <div class="panel-body" ng-if="myJson"><zingchart id = "myChart" zc-json = "myJson" zc-height = 400 zc-width = 2000 ></zingchart> </div>
-</div>
-
-
-  </script>
    
  
 
  
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
-<script src="controllers/controller.js"></script>
-<script src = "https://cdn.zingchart.com/zingchart.min.js" ></script>  
-<script src = "https://cdn.zingchart.com/angular/zingchart-angularjs.js" ></script>
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+  <script src="controllers/controller.js"></script>
+  <script src = "https://cdn.zingchart.com/zingchart.min.js" ></script>  
+  <script src = "https://cdn.zingchart.com/angular/zingchart-angularjs.js" ></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <!-- Angular Material Library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
 </body>
 </html>

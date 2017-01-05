@@ -11,28 +11,16 @@ app.use(bodyParser.json());
 
 
 
-
+// start point to load home page
 app.get('',function(req,res){
 	res.sendFile(__dirname+"/public/home.html");
-//res.sendFile('./public/views/index.html',{root:__dirname});
+
 });
 
-app.post('/insertall',insertall.insertall);
-app.post('/graphmonth',graphmonth.graphmonth);
+app.post('/insertall',insertall.insertall);   //  insert entry controller 
+app.post('/graphmonth',graphmonth.graphmonth);  //  graph genrator controller
 
-/*User.find({}, function(err, users) {
-  if (err) throw err;
 
-  // object of all the users
-  console.log(users+"entry");
-});
-
-/*
-User.remove(function(err) {
-    if (err) throw err;
-
-    console.log('User successfully deleted!');
-  });*/
 
 app.listen(process.env.PORT || 3001,function(err)
     {

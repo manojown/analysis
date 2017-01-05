@@ -1,4 +1,4 @@
-var User = require('./database');
+var User = require('./database');  //  import database to done operation
 
 
 module.exports.graphmonth = function(req,res)
@@ -15,21 +15,18 @@ module.exports.graphmonth = function(req,res)
 		var sdate = syyyy+"-"+smm+"-"+sdd;
 		var edate = eyyyy+"-"+emm+"-"+edd;
 		console.log(sdate + " " + edate);
+		//  hold data  which we fetch from databse
 		var data = {
 			all : []
 		}
-		console.log(base+ "my current base is");
+		
+
+
+		// search entry for  user entered details
 		User.find({"base":base,"date": {'$gte': new Date(sdate),'$lt':new Date(edate)}}, function(err, users) {
-		  if (err) throw err;
-
-		  data.all.push({users});
-
-		 
-		  console.log(users+"inn");
-		  	res.send(data.all[0].users);
-		});
-	
-	
-	
+			  if (err) throw err;
+			  data.all.push({users});
+			  res.send(data.all[0].users);
+		});	
 		
 }

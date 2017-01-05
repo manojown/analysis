@@ -1,5 +1,5 @@
 var myApp = angular.module('myApp', ['zingchart-angularjs','ngMaterial','material.svgAssetsCache']);
-myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http,$element) {
+myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http,$element,$q) {
     console.log("Hello World from controller");
 
 
@@ -68,22 +68,33 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
      
         //end here
 
-  $scope.insertall = function() {
+  
      
     
 
 
-    $scope.flag = "Please wait...!";
+   // $scope.flag = "Please wait...!";
+ 
+     
+       
 
 
-        
+           
+
+   $scope.insertall = function($q) {
+ 
          $http.post('/insertall',{data : {"c1":$scope.contact,"c2":$scope.selected1}}).success(function(response) {
-               console.log(response+"hello");
-          $scope.flag = "success Full inserted";
+                deferred.resolve('request successful');
+          
              }).error(function(){
+                deferred.reject('ERROR');
                     $scope.flag = "success Full inserted";
              });
-  };
+   
+
+}
+
+ 
 
 
   $scope.generate = function(){
@@ -174,7 +185,7 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
             "utc": true,
             "title": {
                 "y": "15px",
-                "text": "Currency Rates From "+monthNames[new Date($scope.date.start).getMonth()]+"-"+new Date($scope.date.start).getFullYear()+" to "+monthNames[new Date($scope.date.end).getMonth()]+"-"+new Date($scope.date.end).getFullYear(),
+                "text": $scope.date.base+" Currency Rates From "+monthNames[new Date($scope.date.start).getMonth()]+"-"+new Date($scope.date.start).getFullYear()+" to "+monthNames[new Date($scope.date.end).getMonth()]+"-"+new Date($scope.date.end).getFullYear(),
                 "background-color": "none",
                 "font-color": "#e38c2d",
                 "font-size": "24px",
@@ -225,7 +236,7 @@ $scope.colorcode = ["#712400","#322dad","#8f7d6e","#cbd021","#504faf","#8e50d7",
                 }
             },
             "scale-y": {
-                "values": "0:500:1",
+                "values": "0:900:10",
                 "item": {
                     "font-color": "#05636c",
                     "font-weight": "normal"
